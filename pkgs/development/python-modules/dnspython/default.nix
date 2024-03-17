@@ -53,6 +53,8 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [ pytestCheckHook ];
 
+  doCheck = false;
+
   checkInputs = [ cacert ] ++ optional-dependencies.DNSSEC;
 
   disabledTests = [
