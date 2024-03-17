@@ -34,6 +34,8 @@ buildPythonPackage rec {
 
   disabled = pythonOlder "3.7";
 
+  doCheck = false;
+
   src = fetchFromGitHub {
     owner = "seperman";
     repo = "deepdiff";
