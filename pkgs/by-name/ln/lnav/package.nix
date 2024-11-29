@@ -48,9 +48,8 @@ stdenv.mkDerivation rec {
     readline
     sqlite
     curl
-    gpm
     libarchive
-  ];
+  ] ++ lib.optional stdenv.hostPlatform.isLinux gpm;
 
   preConfigure = ''
     ./autogen.sh
