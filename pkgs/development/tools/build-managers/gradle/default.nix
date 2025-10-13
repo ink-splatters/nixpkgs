@@ -1,6 +1,6 @@
 {
   callPackage,
-  temurin-bin-24
+  temurin-bin-25
 }:
 
 let
@@ -54,7 +54,7 @@ let
           tests = {
             toolchains =
               let
-                javaVersion = lib.getVersion temurin-bin-24;
+                javaVersion = lib.getVersion temurin-bin-25;
                 javaMajorVersion = lib.versions.major javaVersion;
               in
               runCommand "detects-toolchains-from-nix-env"
@@ -63,7 +63,7 @@ let
                   nativeBuildInputs = [
                     (gradle.override {
                       javaToolchains = [
-			 temurin-bin-24
+			 temurin-bin-25
                       ];
                     })
                   ];
@@ -218,7 +218,7 @@ let
         in
         ''
           # get the correct jar executable for cross
-          export PATH="${temurin-bin-24}/bin:$PATH"
+          export PATH="${temurin-bin-25}/bin:$PATH"
           . ${./patching.sh}
 
           nativeVersion="$(extractVersion native-platform $out/lib/gradle/lib/native-platform-*.jar)"
@@ -329,17 +329,17 @@ rec {
   gradle_9 = gen' {
     version = "9.1.0";
     hash = "sha256-oX3dhaJran9d23H/iwX8UQTAICxuZHgkKXkMkzaGyAY=";
-    defaultJava = temurin-bin-24;
+    defaultJava = temurin-bin-25;
   };
   gradle_8 = gen' {
     version = "8.14.3";
     hash = "sha256-vXEQIhNJMGCVbsIp2Ua+7lcVjb2J0OYrkbyg+ixfNTE=";
-    defaultJava = temurin-bin-24;
+    defaultJava = temurin-bin-25;
   };
   gradle_7 = gen' {
     version = "7.6.6";
     hash = "sha256-Zz2XdvMDvHBI/DMp0jLW6/EFGweJO9nRFhb62ahnO+A=";
-    defaultJava = temurin-bin-24;
+    defaultJava = temurin-bin-25;
   };
 
   # Default version of Gradle in nixpkgs.
