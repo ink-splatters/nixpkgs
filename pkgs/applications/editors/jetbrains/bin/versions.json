@@ -67,10 +67,10 @@
     "mps": {
       "update-channel": "MPS RELEASE",
       "url-template": "https://download.jetbrains.com/mps/{versionMajorMinor}/MPS-{version}.tar.gz",
-      "version": "2025.2",
-      "sha256": "619bfe35ee4f922582e9ebb12ff11b0374eddffa570f7f9abe480f50226b5788",
-      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2.tar.gz",
-      "build_number": "252.23892.529"
+      "version": "2025.2.1",
+      "sha256": "cfbe530d0385cf3e9ccc2f18f43db25525e0024abdbcd3203bd66fb77fc6f3b4",
+      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2.1.tar.gz",
+      "build_number": "252.26199.587"
     },
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
@@ -206,10 +206,10 @@
     "mps": {
       "update-channel": "MPS RELEASE",
       "url-template": "https://download.jetbrains.com/mps/{versionMajorMinor}/MPS-{version}.tar.gz",
-      "version": "2025.2",
-      "sha256": "619bfe35ee4f922582e9ebb12ff11b0374eddffa570f7f9abe480f50226b5788",
-      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2.tar.gz",
-      "build_number": "252.23892.529"
+      "version": "2025.2.1",
+      "sha256": "cfbe530d0385cf3e9ccc2f18f43db25525e0024abdbcd3203bd66fb77fc6f3b4",
+      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2.1.tar.gz",
+      "build_number": "252.26199.587"
     },
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
@@ -345,10 +345,10 @@
     "mps": {
       "update-channel": "MPS RELEASE",
       "url-template": "https://download.jetbrains.com/mps/{versionMajorMinor}/MPS-{version}-macos.dmg",
-      "version": "2025.2",
-      "sha256": "7fd49bfac7e9150e2827d7c6b9f1ad24405963b50efa948492e3ec3202b0ac84",
-      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2-macos.dmg",
-      "build_number": "252.23892.529"
+      "version": "2025.2.1",
+      "sha256": "e0b2644918ffe76b10001fc7904a58b2ec88cda2d317b10508d3bac784a490b2",
+      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2.1-macos.dmg",
+      "build_number": "252.26199.587"
     },
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
@@ -484,10 +484,10 @@
     "mps": {
       "update-channel": "MPS RELEASE",
       "url-template": "https://download.jetbrains.com/mps/{versionMajorMinor}/MPS-{version}-macos-aarch64.dmg",
-      "version": "2025.2",
-      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2-macos-aarch64.dmg",
-      "sha256": "5f1822a639b199ec3c2ca7f2352277bfc1727e4e46976bdab71fabf7fe62a280",
-      "build_number": "252.23892.529"
+      "version": "2025.2.1",
+      "url": "https://download.jetbrains.com/mps/2025.2/MPS-2025.2.1-macos-aarch64.dmg",
+      "sha256": "d409c82b06cab622dc469d6929e291e40b81b21e1e4b784833d07eb7697f5f61",
+      "build_number": "252.26199.587"
     },
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
