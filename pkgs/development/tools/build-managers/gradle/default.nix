@@ -1,8 +1,6 @@
 {
   callPackage,
-  jdk11,
-  jdk17,
-  jdk21,
+  temurin-bin-25,
   nix-update-script,
 }:
 
@@ -50,7 +48,7 @@ let
         tests = {
           toolchains =
             let
-              javaVersion = lib.getVersion jdk11;
+              javaVersion = lib.getVersion temurin-bin-25;
               javaMajorVersion = lib.versions.major javaVersion;
             in
             runCommand "detects-toolchains-from-nix-env"
@@ -59,7 +57,7 @@ let
                 nativeBuildInputs = [
                   (gradle.override {
                     javaToolchains = [
-                      jdk11
+                      temurin-bin-25
                     ];
                   })
                 ];
@@ -209,7 +207,7 @@ let
         in
         ''
           # get the correct jar executable for cross
-          export PATH="${buildPackages.jdk}/bin:$PATH"
+          export PATH="${buildPackages.temurin-bin-25}/bin:$PATH"
           . ${./patching.sh}
 
           nativeVersion="$(extractVersion native-platform $out/lib/gradle/lib/native-platform-*.jar)"
@@ -340,24 +338,16 @@ rec {
   gradle_9 = mkGradle {
     version = "9.1.0";
     hash = "sha256-oX3dhaJran9d23H/iwX8UQTAICxuZHgkKXkMkzaGyAY=";
-    defaultJava = jdk21;
+    defaultJava = temurin-bin-25;
+    # Only enable this on *one* version to avoid duplicate PRs.
+    enableUpdateScript = true;
   };
   gradle_8 = mkGradle {
     version = "8.14.3";
     hash = "sha256-vXEQIhNJMGCVbsIp2Ua+7lcVjb2J0OYrkbyg+ixfNTE=";
-    defaultJava = jdk21;
-    # Only enable this on *one* version to avoid duplicate PRs.
-    enableUpdateScript = true;
-  };
-  gradle_7 = mkGradle {
-    version = "7.6.6";
-    hash = "sha256-Zz2XdvMDvHBI/DMp0jLW6/EFGweJO9nRFhb62ahnO+A=";
-    defaultJava = jdk17;
-    meta.knownVulnerabilities = [
-      "Gradle 7 no longer receives security updates with the release of Gradle 9 on 31 July 2025. https://endoflife.date/gradle"
-    ];
+    defaultJava = temurin-bin-25;
   };
 
   # Default version of Gradle in nixpkgs.
-  gradle = gradle_8;
+  gradle = gradle_9;
 }
