@@ -160,8 +160,22 @@ makeScopeWithSplicing' {
           ln -s "${targetLlvmPackages.compiler-rt.out}/share" "$rsrc/share"
         '';
 
+      darwinBintools = darwin.binutils.override {
+        bintools = darwin.binutils-unwrapped.override {
+          inherit (self) clang-unwrapped llvm llvm-manpages;
+          # ThinLTO archives need archive tools from the same LLVM version as clang.
+          useLlvmRanlib = true;
+        };
+      };
+
       bintoolsNoLibc' = if bootBintoolsNoLibc == null then self.bintoolsNoLibc else bootBintoolsNoLibc;
-      bintools' = if bootBintools == null then self.bintools else bootBintools;
+      bintools' =
+        if bootBintools == null then
+          self.bintools
+        else if stdenv.targetPlatform.isDarwin then
+          darwinBintools
+        else
+          bootBintools;
     in
     {
       inherit (metadata) release_version;
@@ -222,6 +236,7 @@ makeScopeWithSplicing' {
 
       libstdcxxClang = wrapCCWith rec {
         cc = self.clang-unwrapped;
+        bintools = bintools';
         # libstdcxx is taken from gcc in an ad-hoc way in cc-wrapper.
         libcxx = null;
         extraPackages = [ targetLlvmPackages.compiler-rt ];
@@ -230,6 +245,7 @@ makeScopeWithSplicing' {
 
       libcxxClang = wrapCCWith rec {
         cc = self.clang-unwrapped;
+        bintools = bintools';
         libcxx = targetLlvmPackages.libcxx;
         extraPackages = [ targetLlvmPackages.compiler-rt ];
         extraBuildCommands = mkExtraBuildCommands cc;
@@ -239,6 +255,7 @@ makeScopeWithSplicing' {
       # continues to use the libc++ from LLVM.
       systemLibcxxClang = wrapCCWith rec {
         cc = self.clang-unwrapped;
+        bintools = bintools';
         libcxx = darwin.libcxx;
         extraPackages = [ targetLlvmPackages.compiler-rt ];
         extraBuildCommands = mkExtraBuildCommands cc;

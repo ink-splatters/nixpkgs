@@ -77,6 +77,14 @@ stdenv.mkDerivation {
       mkdir -p foo/lib
       ${CC} -framework CoreFoundation -o core-foundation-check ${./core-foundation-main.c}
       ${emulator} ./core-foundation-check
+
+      echo "checking whether archive tools handle clang ThinLTO objects... " >&2
+      cat > thin-lto-archive.c <<EOF
+      int f(int *p) { return __builtin_popcount(*p); }
+      EOF
+      ${CC} -O3 -flto=thin -c thin-lto-archive.c -o thin-lto-archive.o
+      ar qc libthin-lto-archive.a thin-lto-archive.o
+      ranlib libthin-lto-archive.a
     ''}
 
 

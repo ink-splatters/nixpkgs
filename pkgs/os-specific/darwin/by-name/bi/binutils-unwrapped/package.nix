@@ -8,36 +8,44 @@
   llvm-manpages,
   makeWrapper,
   enableManpages ? stdenvNoCC.targetPlatform == stdenvNoCC.hostPlatform,
+  useLlvmRanlib ? false,
 }:
 
 let
   inherit (stdenvNoCC) targetPlatform hostPlatform;
   targetPrefix = lib.optionalString (targetPlatform != hostPlatform) "${targetPlatform.config}-";
 
-  llvm_cmds = [
-    "addr2line"
-    "ar"
-    "c++filt"
-    "dwarfdump"
-    "dsymutil"
-    "nm"
-    "objcopy"
-    "objdump"
-    "otool"
-    "size"
-    "strings"
-    "strip"
-  ];
+  llvm_cmds =
+    [
+      "addr2line"
+      "ar"
+      "c++filt"
+      "dwarfdump"
+      "dsymutil"
+      "nm"
+      "objcopy"
+      "objdump"
+      "otool"
+    ]
+    ++ lib.optional useLlvmRanlib "ranlib"
+    ++ [
+      "size"
+      "strings"
+      "strip"
+    ];
 
-  cctools_cmds = [
-    "codesign_allocate"
-    "gprof"
-    "ranlib"
-    # Use the cctools versions because the LLVM ones can crash or fail when the cctools ones don’t.
-    # Revisit when LLVM is updated to LLVM 18 on Darwin.
-    "lipo"
-    "install_name_tool"
-  ];
+  cctools_cmds =
+    [
+      "codesign_allocate"
+      "gprof"
+    ]
+    ++ lib.optional (!useLlvmRanlib) "ranlib"
+    ++ [
+      # Use the cctools versions because the LLVM ones can crash or fail when the cctools ones don’t.
+      # Revisit when LLVM is updated to LLVM 18 on Darwin.
+      "lipo"
+      "install_name_tool"
+    ];
 
   linkManPages =
     pkg: source: target:
